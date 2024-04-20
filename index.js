@@ -22,13 +22,28 @@ app.use('/uploads', express.static('uploads'))
 app.use(express.json())
 app.use(cookieParser())
 
-var corsOptions = {
-  origin: ["https://e-products.onrender.com/","https://admin.onrender.com/"],
-  credentials: true,
-  methods : "GET,HEAD,PUT,PATCH,POST,DELETE",
 
+var whitelist = ["https://e-products.onrender.com/","https://admin.onrender.com/"]
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  },
+  methods : "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true,
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
+
+// var corsOptions = {
+//   origin: ["https://e-products.onrender.com/","https://admin.onrender.com/"],
+//   credentials: true,
+//   methods : "GET,HEAD,PUT,PATCH,POST,DELETE",
+
+//   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+// }
 
 app.use(cors(corsOptions))
 
