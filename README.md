@@ -4,4 +4,4 @@ This Project consists of 2 Front-End websites i.e Admin and E-Product created us
 This is the Backened REST API. 
 
 
-API Site : https://e-products-api.onrender.com
+API Site : https://e-products-api.onrender.com/apiv1/products/get-products
